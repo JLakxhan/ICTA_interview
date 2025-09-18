@@ -17,7 +17,11 @@ const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
+// const { PrismaClient } = require('@prisma/client'); // Import Prisma
+// const bcrypt = require('bcryptjs'); // For password hashing
+// const jwt = require('jsonwebtoken'); 
 
+// const prisma = new PrismaClient(); // Instantiate Prisma
 const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: '2mb' }));
@@ -25,6 +29,27 @@ app.use(bodyParser.json({ limit: '2mb' }));
 const PORT = process.env.PORT || 4000;
 const OPENAI_KEY = process.env.OPENAI_API_KEY || null;
 const PROJECTS = new Map();
+
+// if (!JWT_SECRET) {
+//   console.error("FATAL ERROR: JWT_SECRET is not defined in .env file.");
+//   process.exit(1);
+// }
+
+/* ---------------- Authentication Middleware ---------------- */
+
+// const authenticateToken = (req, res, next) => {
+//   const authHeader = req.headers['authorization'];
+//   const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+//   if (token == null) return res.sendStatus(401); // if there isn't any token
+
+//   jwt.verify(token, JWT_SECRET, (err, user) => {
+//     if (err) return res.sendStatus(403); // if token is no longer valid
+//     req.user = user;
+//     next();
+//   });
+// };
+
 
 /* ---------------- Utilities ---------------- */
 
